@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+	<title>HTML5 控制装置陀螺仪 ( 三轴 )</title>
+	<link rel="stylesheet" href="http://www.daiwei.org/components/toast/css/toast.css">
+</head>
+<style>
+	body,html{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		overflow:hidden;
+		min-height: 100%;
+	}
+
+	img{
+		width: 100%;
+	}
+</style>
+<body>
+	<div class="" style="perspective:300;-webkit-perspective:300;height:600px;">
+		<img class="img" src="http://oiq8j9er1.bkt.clouddn.com/music_imissyou.jpg" alt="">
+	</div>
+
+	<p class="p_alpha"></p>
+	<p class="p_beta"></p>
+	<p class="p_gamma"></p>
+</body>
+<script src="http://www.daiwei.org/global/js/jquery.js"></script>
+<script src="http://www.daiwei.org/components/toast/js/toast.js"></script>
+<script>
+	if(window.DeviceOrientationEvent) {
+	    window.addEventListener('deviceorientation', function(event) {
+	  	var alpha = Math.round(event.alpha),
+			beta = Math.round(event.beta),
+			gamma = Math.round(event.gamma);
+
+			$('.img').css({
+				'-webkit-transform':'rotateX('+beta+'deg) rotateY('+gamma+'deg) translate3d('+gamma+'px,'+beta+'px,0)',
+				'-moz-transform':'rotateX('+beta+'deg) rotateY('+gamma+'deg) translate3d('+gamma+'px,'+beta+'px,0)',
+				transform:'rotateX('+beta+'deg) rotateY('+gamma+'deg) translate3d('+gamma+'px,'+beta+'px,0)',
+			})
+	    }, false);
+
+	    $('.p_alpha').text('alpha:'+alpha);
+	    $('.p_beta').text('beta:'+beta);
+	    $('.p_gamma').text('gamma:'+gamma);
+	}else{
+	    document.querySelector('body').innerHTML = '你的瀏覽器不支援喔';
+	}
+</script>
+</html>
